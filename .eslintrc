@@ -1,0 +1,18 @@
+{
+	"parser": "babel-eslint",
+	"env": {
+		"browser": true,
+		"node": true,
+		"es6": true
+	},
+	"rules": {
+		"semi": "off",
+		"arrow-parens": "off",
+		"linebreak-style": "off",
+		"no-tabs": "off",
+		"comma-dangle": "off",
+		"indent": ["error", "tab"],
+		"max-len": ["warn", 110]
+	},
+	"extends": ["eslint:recommended", "google"]
+}
