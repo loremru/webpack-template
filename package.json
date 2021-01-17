@@ -1,14 +1,17 @@
 {
-  "name": "isakov.pro",
+  "name": "webpack-template",
   "version": "1.0.0",
-  "description": "",
+  "description": "Ready-made webpack template for layout on pug, sass with configured babel and esling",
   "main": "index.js",
-  "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve",
     "build": "cross-env NODE_ENV=production webpack --mode production"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loremru/webpack-template.git"
+  },
+  "keywords": ["webpack", "template", "webpack configuration"],
   "author": "Issakov Ilya <mr.nonamez08@yandex.ru> www.isakov.pro",
   "license": "ISC",
   "devDependencies": {
