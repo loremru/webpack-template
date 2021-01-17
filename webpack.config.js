@@ -67,10 +67,6 @@ module.exports = {
 						from: path.resolve(__dirname, 'src', 'images'),
 						to: path.resolve(__dirname, 'dist', 'images')
 					},
-					{
-						from: path.resolve(__dirname, 'src', 'fonts'),
-						to: path.resolve(__dirname, 'dist', 'fonts')
-					}
 				]
 		}),
 		new MiniCssExtractPlugin({
@@ -82,6 +78,17 @@ module.exports = {
 			{
 				test: /\.pug$/,
 				use: 'pug-loader'
+			},
+			{
+				test: /\.(ttf|eot|woff|woff2)$/,
+				use: {
+					loader: 'file-loader',
+					options: {
+						name: '[name].[ext]',
+						outputPath: 'fonts',
+						publicPath: 'fonts',
+					}
+				}
 			},
 			{
 				test: /\.css$/,
@@ -103,3 +110,5 @@ module.exports = {
 		]
 	}
 }
+
+
