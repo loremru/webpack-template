@@ -91,6 +91,17 @@ module.exports = {
 				}
 			},
 			{
+				test: /\.(jpg|png|svh|jpf|webp)$/,
+				use: {
+					loader: 'file-loader',
+					options: {
+						name: '[name].[ext]',
+						outputPath: 'images',
+						publicPath: 'images',
+					}
+				}
+			},
+			{
 				test: /\.css$/,
 				use: [MiniCssExtractPlugin.loader, 'css-loader']
 			},
