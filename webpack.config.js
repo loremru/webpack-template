@@ -4,6 +4,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const fs = require('fs')
+const webpack = require('webpack')
 
 const isDev = process.env.NODE_ENV === 'development'
 // const isProd = !isDev
@@ -69,6 +70,10 @@ module.exports = {
 					},
 				]
 		}),
+		new webpack.ProvidePlugin({
+			$: 'jquery',
+			jQuery: 'jquery',
+		}),
 		new MiniCssExtractPlugin({
 			filename: filename('css')
 		}),
@@ -117,7 +122,7 @@ module.exports = {
 				test: /\.m?js$/,
 				exclude: /node_modules/,
 				use: jsLoaders()
-			}
+			},
 		]
 	}
 }
