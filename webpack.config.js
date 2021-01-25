@@ -3,11 +3,24 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const fs = require('fs')
 const webpack = require('webpack')
 
 const isDev = process.env.NODE_ENV === 'development'
-// const isProd = !isDev
+const isProd = !isDev
+
+const optimization = () => {
+	const optimizationObj = {}
+	if (isProd) {
+		optimizationObj.minimizer = [
+			new CssMinimizerPlugin(),
+			new TerserPlugin()
+		]
+	}
+	return optimizationObj
+}
 
 const filename = ext => isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`
 
@@ -52,11 +65,15 @@ module.exports = {
 		}
 	},
 	devtool: isDev ? 'source-map' : false,
+	optimization: optimization(),
 	plugins: [
 		new CleanWebpackPlugin(),
 		...PAGES.map(page => new HtmlWebpackPlugin({
 			template: path.resolve(PAGES_DIR, page),
-			filename: `./${page.replace(/\.pug/, '.html')}`
+			filename: `./${page.replace(/\.pug/, '.html')}`,
+			minify: {
+				collapseWhitespace: isProd
+			}
 		})),
 		// new HtmlWebpackPlugin({
 		// 	template: path.resolve(__dirname, 'src', 'index.html')
@@ -96,7 +113,7 @@ module.exports = {
 				}
 			},
 			{
-				test: /\.(jpg|png|svh|jpf|webp)$/,
+				test: /\.(jpg|png|svg|jpf|webp)$/,
 				use: {
 					loader: 'file-loader',
 					options: {
